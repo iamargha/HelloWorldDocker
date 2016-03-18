@@ -1,11 +1,9 @@
-FROM java:7
+FROM tomcat:7-jre7
+MAINTAINER TCS
 
-COPY src /home/root/javahelloworld/src
-WORKDIR /home/root/javahelloworld
-RUN mkdir bin
-RUN javac -d bin src/HelloWorld.java
+wget 10.221.0.168/artifactory/simple/Connect-Dev-Repo/com/mhe/connectstreaming/CNST_H_20160318_93/fileuploadproject-CNST_H_20160318_93.war
 
-EXPOSE 8080
+ADD fileuploadproject-CNST_H_20160318_93.war /usr/local/tomcat/webapps/
 
-ENTRYPOINT ["java", "-cp", "bin", "HelloWorld"]
+CMD ["catalina.sh", "run"]
 
